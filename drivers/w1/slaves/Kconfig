@@ -68,4 +68,11 @@ config W1_SLAVE_BQ27000
 	  Say Y here if you want to use a hdq
 	  bq27000 slave support.
 
+config W1_SLAVE_DS28EA00
+  tristate "DS28EA00 slave support"
+  depends on W1
+  select CRC16
+  help
+    Say Y here if you want to use add DS28EA00 support.
+
 endmenu
