@@ -212,7 +212,7 @@ static void __init foxg20_add_device_buttons(void) {}
 #if defined(CONFIG_W1_MASTER_GPIO) || defined(CONFIG_W1_MASTER_GPIO_MODULE)
 static struct w1_gpio_platform_data w1_gpio_pdata = {
 	/* If you choose to use a pin other than PB16 it needs to be 3.3V */
-	.pin		= AT91_PIN_PB16,
+	.pin		= AT91_PIN_PA29,
 	.is_open_drain  = 1,
 };
 
