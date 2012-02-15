@@ -87,11 +87,13 @@ static void __init foxg20_map_io(void)
 		ATMEL_UART_CTS
 		| ATMEL_UART_RTS);
 
+
+
 	/* USART4 on ttyS5. (Rx & Tx only) */
-	at91_register_uart(AT91SAM9260_ID_US4, 5, 0);
+	// at91_register_uart(AT91SAM9260_ID_US4, 5, 0);
 
 	/* USART5 on ttyS6. (Rx & Tx only) */
-	at91_register_uart(AT91SAM9260_ID_US5, 6, 0);
+	// at91_register_uart(AT91SAM9260_ID_US5, 6, 0);
 
 	/* set serial console to ttyS0 (ie, DBGU) */
 	at91_set_serial_console(0);
