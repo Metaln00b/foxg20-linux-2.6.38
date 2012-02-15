@@ -264,6 +264,8 @@ static void __init foxg20_board_init(void)
 #endif
 }
 
+// MACHTYPE requested by Acme Boot >=1.18
+
 MACHINE_START(ACMENETUSFOXG20, "Acme Systems srl FOX Board G20")
 	/* Maintainer: Sergio Tanzilli */
 	.boot_params	= AT91_SDRAM_BASE + 0x100,
@@ -272,3 +274,14 @@ MACHINE_START(ACMENETUSFOXG20, "Acme Systems srl FOX Board G20")
 	.init_irq	= foxg20_init_irq,
 	.init_machine	= foxg20_board_init,
 MACHINE_END
+
+// MACHTYPE requested by Acme Boot <=1.17
+
+MACHINE_START(AT91SAM9G20EK, "Acme Systems srl FOX Board G20 (EK)")
+	.boot_params	= AT91_SDRAM_BASE + 0x100,
+	.timer		= &at91sam926x_timer,
+	.map_io		= foxg20_map_io,
+	.init_irq	= foxg20_init_irq,
+	.init_machine	= foxg20_board_init,
+MACHINE_END
+
