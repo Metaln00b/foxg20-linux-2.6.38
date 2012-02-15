@@ -166,7 +166,7 @@ static struct gpio_led foxg20_leds[] = {
 		.name			= "user_led",
 		.gpio			= AT91_PIN_PC7,
 		.active_low		= 0,
-		.default_trigger	= "heartbeat",
+		.default_trigger	= "default-on",
 	},
 };
 
