@@ -19,6 +19,9 @@
  * Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
  */
 
+// Board set-up to wire up to 8 Daisy-2 modules (step motor servo controller)
+// to a single FOX Board G20 
+
 #include <linux/types.h>
 #include <linux/init.h>
 #include <linux/mm.h>
@@ -66,13 +69,15 @@ static void __init foxg20_map_io(void)
 	at91_register_uart(0, 0, 0);
 
 	/* USART0 on ttyS1. (Rx, Tx, CTS, RTS, DTR, DSR, DCD, RI) */
-	at91_register_uart(AT91SAM9260_ID_US0, 1,
+	/*at91_register_uart(AT91SAM9260_ID_US0, 1,
 				ATMEL_UART_CTS
 				| ATMEL_UART_RTS
 				| ATMEL_UART_DTR
 				| ATMEL_UART_DSR
 				| ATMEL_UART_DCD
 				| ATMEL_UART_RI);
+
+	*/
 
 	/* USART1 on ttyS2. (Rx, Tx, RTS, CTS) */
 	at91_register_uart(AT91SAM9260_ID_US1, 2,
@@ -83,10 +88,10 @@ static void __init foxg20_map_io(void)
 	at91_register_uart(AT91SAM9260_ID_US2, 3, 0);
 
 	/* USART3 on ttyS4. (Rx, Tx, RTS, CTS) */
-	at91_register_uart(AT91SAM9260_ID_US3, 4,
+	/* at91_register_uart(AT91SAM9260_ID_US3, 4,
 		ATMEL_UART_CTS
 		| ATMEL_UART_RTS);
-
+	*/
 
 
 	/* USART4 on ttyS5. (Rx & Tx only) */
@@ -250,20 +255,20 @@ static void __init foxg20_board_init(void)
 	/* USB Device */
 	at91_add_device_udc(&foxg20_udc_data);
 	/* SPI */
-	at91_add_device_spi(foxg20_spi_devices, ARRAY_SIZE(foxg20_spi_devices));
+	//at91_add_device_spi(foxg20_spi_devices, ARRAY_SIZE(foxg20_spi_devices));
 	/* Ethernet */
 	at91_add_device_eth(&foxg20_macb_data);
 	/* MMC */
 	at91_add_device_mmc(0, &foxg20_mmc_data);
 	/* I2C */
-	at91_add_device_i2c(foxg20_i2c_devices, ARRAY_SIZE(foxg20_i2c_devices));
+	//at91_add_device_i2c(foxg20_i2c_devices, ARRAY_SIZE(foxg20_i2c_devices));
 	/* LEDs */
 	at91_gpio_leds(foxg20_leds, ARRAY_SIZE(foxg20_leds));
 	/* Push Buttons */
 	foxg20_add_device_buttons();
-#if defined(CONFIG_W1_MASTER_GPIO) || defined(CONFIG_W1_MASTER_GPIO_MODULE)
-	at91_add_device_w1();
-#endif
+
+	// Don't add the w1 bus usually enabled on PA29 (line D2.4)
+	// at91_add_device_w1();
 }
 
 // MACHTYPE requested by Acme Boot >=1.18
